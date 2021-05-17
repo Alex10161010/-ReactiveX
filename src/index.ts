@@ -1,5 +1,11 @@
-import {Observable} from 'rxjs'
+import {Observable,Observer} from 'rxjs'
 
+/* Segunda forma para ver los metodos de un observable */
+const observer: Observer <any> = {
+    next:value=>console.log('Siguiente [next]:', value),
+    error:error=>console.error('Error [obs]',error),
+    complete:()=>console.info('Completado [obs]')
+};
 
 const obs$ = new Observable<string>(subscribe=>{
 
@@ -15,12 +21,13 @@ const obs$ = new Observable<string>(subscribe=>{
     subscribe.next(nombre);
 });
 
-
-obs$.subscribe(
-    valor => console.log('next', valor),
-    error => console.error('error', error),
-    () => console.info('Completado')
-);
+obs$.subscribe(observer);
+/* Primera forma para ver los metodos de un observable */
+//obs$.subscribe(
+//    valor => console.log('next', valor),
+//    error => console.error('error', error),
+//    () => console.info('Completado')
+//);
 
 
 
