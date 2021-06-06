@@ -1,38 +1,19 @@
-import {Observable,Observer} from 'rxjs'
+import {Observable,Observer} from 'rxjs';
 
-/* Segunda forma para ver los metodos de un observable */
-const observer: Observer <any> = {
-    next:value=>console.log('Siguiente [next]:', value),
-    error:error=>console.error('Error [obs]',error),
-    complete:()=>console.info('Completado [obs]')
+const observadora: Observer <any>={
+    next: value => console.log('next', value),
+    error: error => console.warn('error:', error),
+    complete: ()=> console.info('completado')
 };
 
-const obs$ = new Observable<string>(subscribe=>{
 
-    let nombre: string ='Hola Mundo soy Elias';
-    subscribe.next(nombre);
-    subscribe.next(nombre);
-    subscribe.next(nombre);
-    subscribe.next(nombre);
-    /* Forzar un error */
-    const a = undefined;
-    subscribe.next(a);
-    subscribe.complete();
-    subscribe.next(nombre);
+const intervalo$ = new  Observable((subscribe)=>{
+    /* Creando un contador cada segundo*/
+    let contador= 0;
+    /* setInterval(()=>{
+        subscribe.next(contador)
+        contador ++;
+    },1000); */
 });
 
-obs$.subscribe(observer);
-/* Primera forma para ver los metodos de un observable */
-//obs$.subscribe(
-//    valor => console.log('next', valor),
-//    error => console.error('error', error),
-//    () => console.info('Completado')
-//);
-
-
-
-
-
-
-
-
+intervalo$.subscribe((num)=>console.log('Num:', num));
